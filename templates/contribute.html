@@ -24,29 +24,30 @@
         </nav>
     </header>
 
-       <!-- FAQ -->
-       <section class="faq">
-        <div class="container">
-        <h2>FAQ</h2>
-        <div class="faq-box">
-            <div class="question">
-                <strong>What is it about?</strong>
-                <p>The Afamefuna Project is a not for profit, open source, platform with interest in the area of Onomastics - particularly dedicated to curating, understanding, promoting Igbo names in fun relatable ways. This is why www.myigboname.com exists.</p>
-        </div>
-        <div class="question">
-            <strong>"What have we done?"</strong>
-            <p>We have over 3000 entries and more awaiting approval. The little passion project has grown from little beginnings but we haven’t done it alone. From culture enthusiasts, linguists, and every Emeka Okeke, community members have chipped in to bring the project this far. But it is still work in progress.</p>
-        </div>
-        <div class="question">
-            <strong>"Can I work with you?"</strong>
-            <p>Yes. We have worked in the past with undergraduates in the field of linguistics, we continue to encourage and appreciate the input of culture enthusiasts and linguists who may be willing to contribute new names or write articles for the blog. But we will also require the contributions of web developers and designers. Web developers who wish to contribute to the improvement of this platform may contact us using the contribute section.</p>
-        </div>
-        <div class="question">
-            <strong>"Do you offer paid employment"</strong>
-            <p>Unfortunately, we do not have the capacity to offer payment for services at this moment. We have in the past provided stipend for undergraduate who helped in the project but we cannot at this present moment.</p>
-        </div>
-        </div>
-        </div>
+        <!-- Contribute Section -->
+    <section id="contribute">
+        <h2>CONTRIBUTE</h2>
+        <p>Know any Igbo names and their meanings you wish we should know? Have any Igbo names you want their meaning? Use the contribute section and we will send you an email once it's up on the site.</p>
+        
+        <form action="#" method="POST">
+            <input type="text" name="name" placeholder="Suggested name" required>
+            
+            <label>Offer pronunciation (pronunciations help us resolve meanings quickly)</label>
+            <button type="button" class="record-button">🎤 Click to record</button>
+            
+            <select name="gender" required>
+                <option value="">Indicate gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Unisex">Unisex</option>
+            </select>
+            
+            <textarea name="meaning" placeholder="Provide meaning" required></textarea>
+            
+            <input type="email" name="email" placeholder="Email (Provide email for feedback when entry is added)" required>
+            
+            <button type="submit">Send</button>
+        </form>
     </section>
 
 <footer class="main-footer">

@@ -524,7 +524,53 @@ h6 { font-size: 0.875rem; }
       margin-bottom: 20px;
     }
   
+/* Contribute Section */
+#contribute {
+  max-width: 600px;
+  margin: 50px auto;
+  background: white;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
 
+#contribute h2 {
+  color: #004d40;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+input, select, textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+textarea {
+  height: 100px;
+}
+
+.record-button {
+  background-color: #ff9800;
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+}
+
+button[type="submit"] {
+  background-color: #00796b;
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+}
         .name-day,
         .proverb-day,
         .browse-names {

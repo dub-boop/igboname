@@ -90,65 +90,66 @@ h6 { font-size: 0.875rem; }
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
-        .faq {
-    background-color: white;
-    padding: 20px 0;
-  }
+ /* FAQ Section and Page */
+.faq {
+background-color: white;
+padding: 20px 0;
+}
   
-  .faq .container {
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 0 20px;
-    text-align: center;
-  }
+.faq .container {
+max-width: 1000px;
+margin: 0 auto;
+padding: 0 20px;
+text-align: center;
+}
   
-  .faq h2 {
-    font-size: 2rem;
-    color: #008080;
-    margin-bottom: 20px;
-  }
+.faq h2 {
+font-size: 2rem;
+color: #008080;
+margin-bottom: 20px;
+}
   
-  .faq-box {
-    width: 830px;
-    background-color: #e6f3f3;
-    box-shadow: 0 0 10px #ccc;
-    padding: 20px;
-    margin: 0 auto;
-    text-align: left;
-  }
+.faq-box {
+width: 830px;
+background-color: #e6f3f3;
+box-shadow: 0 0 10px #ccc;
+padding: 20px;
+margin: 0 auto;
+text-align: left;
+}
   
-  .faq-box .question {
-    margin-bottom: 20px;
-  }
+.faq-box .question {
+margin-bottom: 20px;
+}
   
-  .faq-box strong {
-    font-weight: bold;
-    font-size: 1.1rem;
-    color: #008080;
-  }
+.faq-box strong {
+font-weight: bold;
+font-size: 1.1rem;
+color: #008080;
+}
   
-  .faq-box p {
-    font-size: 1rem;
-    line-height: 1.5;
-  }
+.faq-box p {
+font-size: 1rem;
+line-height: 1.5;
+}
   
   /* Footer Section */
-  .main-footer {
-    background-color: #008080;
-    padding: 20px 0;
-    color: white;
-    width: 100%; /* Ensure the footer stretches across the screen */
-  }
+.main-footer {
+background-color: #008080;
+padding: 20px 0;
+color: white;
+width: 100%; /* Ensure the footer stretches across the screen */
+}
   
-  .main-footer .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-  }
+.main-footer .container {
+max-width: 1200px;
+margin: 0 auto;
+padding: 0 20px;
+display: flex;
+justify-content: space-between;
+align-items: center;
+flex-wrap: wrap;
+}
   
   .left-content {
     display: flex;
@@ -524,7 +525,7 @@ h6 { font-size: 0.875rem; }
       margin-bottom: 20px;
     }
   
-/* Contribute Section */
+/* Contribute Menu */
 #contribute {
   max-width: 600px;
   margin: 50px auto;
@@ -571,6 +572,7 @@ button[type="submit"] {
   padding: 10px;
   cursor: pointer;
 }
+        .proverb-box,
         .name-day,
         .proverb-day,
         .browse-names {
@@ -579,43 +581,211 @@ button[type="submit"] {
         text-align: center;
         }
 
-        /* Proverb Section */
-#proverb-card {
-  text-align: center;
-  padding: 40px 20px;
-}
-
-.proverb-box {
+        /* Proverb Menu */
+        #proverb-card {
+          max-width: 1200px;
+          background: white;
+          padding: 20px;
+          margin: 20px auto;
+          border-radius: 8px;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      
+      h2, h3 {
+          color: #333;
+      }
+      
+      .proverb-box {
+          background: white;
+          padding: 15px;
+          border-left: 20px solid #008080;
+          border-radius: 8px;
+          margin-bottom: 15px;
+          width: 500px;
+          height: 500px;
+          text-align: center;
+          box-shadow: 0 0 10px #ccc;
+          position: relative
+      }
+      
+      .proverb-text {
+          font-style: italic;
+          color: #444;
+      }
+      
+      .translation-box {
+          background: white;
+          padding: 20px;
+          border-radius: 5px;
+          margin-top: 5px;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+          text-align: center;
+      }
+      
+      .proverb-meta {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          font-size: 0.9em;
+          color: #555;
+      }
+      
+      .share-icons a {
+          text-decoration: none;
+          margin-left: 8px;
+          font-size: 1.2em;
+      }
+      
+      .previous-proverb {
+          text-align: center;
+          margin-top: 20px;
+          margin: 0 auto;
+      }
+      
+      button {
+          background: #008080;
+          color: white;
+          border: none;
+          padding: 10px 15px;
+          border-radius: 5px;
+          cursor: pointer;
+          font-size: 1em;
+      }
+      
+      button:hover {
+          background: #e30b0b;
+      }
+      .proverb .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+        text-align: center;
+      }
+/* Privacy Page */
+.privacy {
   background-color: white;
-  border: 3px solid #FFD700;
+  padding: 20px 0;
+  }
+    
+  .privacy .container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 20px;
+  text-align: center;
+  }
+    
+  .privacy h2 {
+  font-size: 2rem;
+  color: #008080;
+  margin-bottom: 20px;
+  }
+    
+  .privacy-box {
+  width: 830px;
+  background-color: #FFF;
+  box-shadow: 0 0 10px #ccc;
   padding: 20px;
-  display: inline-block;
-  max-width: 600px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.proverb-text {
-  font-size: 18px;
+  margin: 0 auto;
+  text-align: left;
+  }
+    
+  .privacy-box .question {
+  margin-bottom: 20px;
+  }
+    
+  .privacy-box strong {
   font-weight: bold;
-}
+  font-size: 1.1rem;
+  color: #008080;
+  }
+    
+  .privacy-box p {
+  font-size: 1rem;
+  line-height: 1.5;
+  }
 
-.translation-box {
-  background-color: #f2f2f2;
-  padding: 10px;
-  margin-top: 10px;
-  border-radius: 5px;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
-}
+/* About Us Page */
+.about {
+  background-color: white;
+  padding: 20px 0;
+  }
+    
+  .about .container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 20px;
+  text-align: center;
+  }
+    
+  .about h2 {
+  font-size: 2rem;
+  color: #008080;
+  margin-bottom: 20px;
+  }
+    
+  .about-box {
+  width: 830px;
+  background-color: #FFF;
+  box-shadow: 0 0 10px #ccc;
+  padding: 20px;
+  margin: 0 auto;
+  text-align: left;
+  }
+    
+  .about-box .question {
+  margin-bottom: 20px;
+  }
+    
+  .about-box strong {
+  font-weight: bold;
+  font-size: 1.1rem;
+  color: #008080;
+  }
+    
+  .about-box p {
+  font-size: 1rem;
+  line-height: 1.5;
+  }
 
-.proverb-meta {
-  margin-top: 15px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.share-icons a {
-  text-decoration: none;
-  margin: 0 5px;
-  font-size: 18px;
-}
+/* Cookie Policy Page */
+.cookie {
+  background-color: white;
+  padding: 20px 0;
+  }
+    
+  .cookie .container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 20px;
+  text-align: center;
+  }
+    
+  .cookie h2 {
+  font-size: 2rem;
+  color: #008080;
+  margin-bottom: 20px;
+  }
+    
+  .cookie-box {
+  width: 830px;
+  background-color: #FFF;
+  box-shadow: 0 0 10px #ccc;
+  padding: 20px;
+  margin: 0 auto;
+  text-align: left;
+  }
+    
+  .cookie-box .question {
+  margin-bottom: 20px;
+  }
+    
+  .cookie-box strong {
+  font-weight: bold;
+  font-size: 1.1rem;
+  color: #008080;
+  }
+    
+  .cookie-box p {
+  font-size: 1rem;
+  line-height: 1.5;
+  }

@@ -28,7 +28,7 @@ h6 { font-size: 0.875rem; }
             display: flex;
             justify-content: space-between;
             align-items: center;
-            max-width: 1200px;
+            max-width: 100%;
             margin: 0 auto;
         }
 
@@ -67,7 +67,7 @@ h6 { font-size: 0.875rem; }
             gap: 2rem;
         }
 
-        
+/* Game Section */        
         .game-box {
             background-color: white;
             padding: 1.5rem;
@@ -76,6 +76,84 @@ h6 { font-size: 0.875rem; }
             border: 7px solid #008080;
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .games {
+        background-color: white;
+        padding: 1.5rem;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        font-family: 'Outfit', sans-serif;
+          }
+
+          .games-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+          .game-card:hover {
+            transform: scale(1.05);
+        }
+        
+        .game-card img {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .game-card {
+          width: 200px;
+          height: 200px;
+          text-align: center;
+          background: #fff;
+          padding: 15px;
+          border-radius: 10px;
+          box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+          transition: transform 0.3s ease-in-out;
+        }
+
+          .games h2 {
+            font-size: 2rem;
+              font-weight: bold;
+              text-align: center;
+              opacity: 0;
+              transform: translateX(-100%);
+              transition: opacity 1s ease-out, transform 1s ease-out;
+          }
+          .games h2.active {
+            opacity: 1;
+              transform: translateX(0);
+              animation: bounce 0.6s ease infinite 1s; /* Delay bounce slightly */
+            }
+        
+      /* Slide-in Animation */
+.slide-in {
+  opacity: 0;
+  transform: translateX(-100%);
+  transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+.slide-in.active {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Bounce Animation */
+.bounce {
+  animation: bounce 0.6s ease infinite 1s;
+}
+
+@keyframes bounce {
+  0%, 100% {
+      transform: translateY(0);
+  }
+  50% {
+      transform: translateY(-10px);
+
+}
+
         }
         .card {
             padding: 1.5rem;
@@ -328,12 +406,6 @@ flex-wrap: wrap;
         color: #333;
         }
   
-        .games {
-            background-color: white;
-            padding: 1.5rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
 /* Name of Day Section*/
         .name-day {
             background-color: #e6f3f3;

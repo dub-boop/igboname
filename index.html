@@ -107,11 +107,23 @@
 
         <!-- Games -->
         <section class="card games">
-            <h2>Games</h2>
-            <p>Get Named</p>
-            <p>Gwam-Gwam-Gwam</p>
-            <p>Igbo Names Puzzle</p>
-        </section>
+            <h2 class="animated-heading">Games</h2>
+            
+            <div class="games-container">
+                <div class="game-card">
+                    <img src="get_named.jpg" alt="Get Named Game">
+                    <p>Get Named</p>
+                </div>
+                <div class="game-card">
+                    <img src="gwam_gwam.jpg" alt="Gwam-Gwam-Gwam Game">
+                    <p>Gwam-Gwam-Gwam</p>
+                </div>
+                <div class="game-card">
+                    <img src="puzzle_game.jpg" alt="Igbo Names Puzzle Game">
+                    <p>Igbo Names Puzzle</p>
+                </div>
+            </div>
+        </section>  
 
         <!-- Browse Names -->
         <section class="card browse-names">
@@ -211,9 +223,25 @@
           });
         });
 
-        // Set the current date in the date
+        // Set the current date in the date //
         document.getElementById('dateStamp').textContent = new Date().toLocaleDateString();
-    </script>
+
+        //Game section script//
+    document.addEventListener("DOMContentLoaded", function () {
+        const h2Element = document.querySelector(".animated-heading");
+
+        function handleScroll() {
+            const position = h2Element.getBoundingClientRect().top;
+            const screenPosition = window.innerHeight / 1.3;
+
+            if (position < screenPosition) {
+                h2Element.classList.add("active");
+            }
+        }
+
+        window.addEventListener("scroll", handleScroll);
+    });
+        </script>        
     </main>
 </body>
 </html>

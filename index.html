@@ -3,9 +3,217 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Test Page</title>
+    <title>Igbo Names & Culture</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Hello, GitHub Pages!</h1>
+    <header>
+        <nav>
+            <div class="nav-links">
+                <img src="logo.png" alt="logo">
+                <a href="index.html">Home</a>
+                <a href="templates\contribute.html">Contribute</a>
+                <a href="templates\proverbs.html">Proverb of the Day</a>
+                <a href="templates\games.html">Games</a>
+                <a href="templates\learn/html">Learn</a>
+                <a href="templates\blog.html">Blog</a>
+            </div>
+            <div class="search-bar">
+                <input type="text" placeholder="Search Igbo names...">
+                <button>Search</button>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container">
+        <!-- Name of the Day -->
+        <section class="card name-day">
+        <h2 style= "color: 333; font-size: 1.75rem; font-family: 'Outfit', sans-serif">Name of the Day</h2>
+         <p style= "font-size: 1rem;">We feature an Igbo name every day. Visit as often as you can.</p>
+         <p style= "font-size: 1rem;">You might find one for your baby or that favorite person.</p>
+            <div class="name-box">
+            <div class="visualizer">
+                <h5 style= "font-size: 1rem">Pronunciation:</h5>
+                <button class="audio-button">pronounce</button>
+                <audio id="name-audio" src="audio.mp3"></audio>
+            <h1 style="color: teal; font-size: 2rem; font-family: 'Outfit', sans-serif">IFENKILI</h1>
+            <h4 style="font-size: 1.25rem;">Igbo-orthography:</h4>
+            <p style="font-size: 0.87rem;">[ifɛn-kɪlɪ]</p>
+            <h4 style="font-size: 1.25rem;">Ndebe script:</h4>
+            </div>
+        </section>
+
+        <!-- Trending Names -->
+        <section class="card">
+            <h2 style= "color: teal; font-size: 1.75rem; font-family: 'Outfit', sans-serif">Trending Names</h2>
+            <div class="trending">
+                <div>
+                    <h3>All Time</h3>
+                    <p>Chimamanda</p>
+                </div>
+                <div>
+                    <h3>Last Week</h3>
+                    <p>Ikechukwu</p>
+                </div>
+                <div>
+                    <h3>This Week</h3>
+                    <p>Ali</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Proverb -->
+        <section class="proverb-day">
+            <div class="container">
+            <h2 style= "color: 333; font-size: 1.75rem; font-family: 'Outfit', sans-serif">Proverb of the Day</h2>
+            <p>Every day, we share some witty, thought-provoking, and even silly expressions you may sometimes find in Igbo conversations.</p>
+        <div class="proverb-card">
+            <p class="proverb-text">Mbe siri ọ bụrụ na e gbuo ya n'ihi na ya jụrụ ajụjụ, ka e lichikwaa ya ụza ka ajụjụ were na-aga n'ihu.</p>
+            <button class="view-translation">View Translation</button>
+            <p class="translation" style="display: none;">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequuntur incidunt dolor dolorem nulla accusantium repudiandae non voluptatem beatae. Inventore perspiciatis tempore culpa facilis vel quod soluta vero odio nam sapiente!</p>
+            <div class="date" id="dateStamp"></div>
+            </div>
+        </div>
+        </section>
+
+        <!-- Articles -->
+        <section class="explore-articles">
+            <div class="container">
+            <h2 style= "color: 333; font-size: 1.75rem; font-family: 'Outfit', sans-serif">Explore Articles</h2>
+            <div class="articles">
+             <div class="article">
+              <h4 style="color: teal; font-size: 1.25rem; font-family: 'Outfit', sans-serif">WHAT IS A NAME?</h4>
+              <p style= "font-size: 1rem;">Special words that we use to identify a person, an animal, a place, or a thing, and they all have a meaning. In many cases that meaning will lie concealed in the name’s history.</p>
+              <a href="full-article.html" class="read-more-btn">Read More</a>
+            </div>
+            <div class="article">
+                <h4 style="color: teal; font-size: 1.25rem; font-family: 'Outfit', sans-serif">TRADITIONAL TITLES IN IGBO NAMES</h4>       
+                <p style= "font-size: 1rem;">An interesting observation from the forgoing is: first, that the Igbo custom presents a condition that makes title taking inescapable and then creates an insurance against the tyranny of a wealthy minority.</p>
+                <a href="full-article.html" class="read-more-btn">Read More</a>
+            </div>
+            <div class="article">
+                <h4 style="color: teal; font-size: 1.25rem; font-family: 'Outfit', sans-serif">UGO IN IGBO NAMES- A FEATHER IN ONE'S CAP</h4>
+                <p style= "font-size: 1rem;">Emmanuel P. Edeh notes that the Eagle represents excellence. As no one would carry live eagles about to make the point, Eagle feathers symbolically feature prominently in Igbo social and religious activities.</p>
+                <a href="full-article.html" class="read-more-btn">Read More</a>
+            </div>
+            <div class="article">                
+             <h4 style="color: teal; font-size: 1.25rem; font-family: 'Outfit', sans-serif">ONWU: WHY DEATH IN IGBO NAMES</h4>
+                <p style= "font-size: 1rem;">It is important that there is always someone to carry on the family name. It is easy to understand the consequent obsession with anything that hinders the achievement of the standard.</p>
+                <a href="full-article.html" class="read-more-btn">Read More</a>
+            </div>
+              </div>
+            </div>
+        </section>
+
+        <!-- Games -->
+        <section class="card games">
+            <h2>Games</h2>
+            <p>Get Named</p>
+            <p>Gwam-Gwam-Gwam</p>
+            <p>Igbo Names Puzzle</p>
+        </section>
+
+        <!-- Browse Names -->
+        <section class="card browse-names">
+            <h2 style= "color: 333; font-size: 1.75rem; font-family: 'Outfit', sans-serif">Browse Names</h2>
+            <div class="alphabet-nav">
+                <a href='#A'><button>A</button></a>
+                <button>B</button>
+                <button>CH</button>
+                <button>D</button>
+                <button>E</button>
+                <button>F</button>
+                <button>G</button>
+                <button>I</button>
+                <button>J</button>
+                <button>K</button>
+                <button>L</button>
+                <button>M</button>
+                <button>N</button>
+                <button>O</button>
+                <button>R</button>
+                <button>S</button>
+                <button>T</button>
+                <button>U</button>
+                <button>W</button>
+                <button>Z</button>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section class="faq">
+            <div class="container">
+            <h2>FAQ</h2>
+            <div class="faq-box">
+                <div class="question">
+                    <strong>What is it about?</strong>
+                    <p>The Afamefuna Project is a not for profit, open source, platform with interest in the area of Onomastics - particularly dedicated to curating, understanding, promoting Igbo names in fun relatable ways. This is why www.myigboname.com exists.</p>
+            </div>
+            <div class="question">
+                <strong>"What have we done?"</strong>
+                <p>We have over 3000 entries and more awaiting approval. The little passion project has grown from little beginnings but we haven’t done it alone. From culture enthusiasts, linguists, and every Emeka Okeke, community members have chipped in to bring the project this far. But it is still work in progress.</p>
+            </div>
+            <div class="question">
+                <strong>"Can I work with you?"</strong>
+                <p>Yes. We have worked in the past with undergraduates in the field of linguistics, we continue to encourage and appreciate the input of culture enthusiasts and linguists who may be willing to contribute new names or write articles for the blog. But we will also require the contributions of web developers and designers. Web developers who wish to contribute to the improvement of this platform may contact us using the contribute section.</p>
+            </div>
+            <div class="question">
+                <strong>"Do you offer paid employment"</strong>
+                <p>Unfortunately, we do not have the capacity to offer payment for services at this moment. We have in the past provided stipend for undergraduate who helped in the project but we cannot at this present moment.</p>
+                <a href="C:\Users\HP ELITEBOOK 1030 G2\Downloads\igboname\templates\faq.html" class="read-more-btn">Read More</a>
+            </div>
+            </div>
+            </div>
+        </section>
+
+    <footer class="main-footer">
+        <div class="container">
+            <div class="left-content">
+                <img src="logo.png" alt="logo">
+                <h3 style="color: white;">The Afamefuna Project</h3>
+                <div class="social-media">
+                    <a href="#"><img src="twitter.png" alt="Twitter"></a>
+                    <a href="#"><img src="pinterest.png" alt="Pinterest"></a>
+                    <a href="#"><img src="facebook.png" alt="Facebook"></a>
+                </div>
+                </div>
+                <div class="right-content">
+                    <div class="links-group">
+                        <a href="templates\about.html" style="color: white;">About Us</a>
+                        <a href="templates\team.html" style="color: white;">The Team</a>
+                        <a href="templates\contact.html" style="color: white;">Contact Us</a>
+                        <a href="templates\faq.html" style="color: white;">FAQ</a>
+                      </div>
+                      <div class="links-group">
+                        <a href="templates\privacy.html" style="color: white;">Privacy Policy</a>
+                        <a href="templates\cookie.html" style="color: white;">Cookie Policy</a>
+                        <a href="templates\editorial.html" style="color: white;">Editorial Policy</a>
+                        <a href="templates\store.html" style="color: white;">Store</a>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+
+
+    <script>
+        document.querySelector('.audio-button').addEventListener('click', function() {
+          document.getElementById('name-audio').play();
+        });
+
+        document.querySelectorAll('.view-translation').forEach(button => {
+          button.addEventListener('click', function() {
+            var translation = this.nextElementSibling;
+            if (translation.style.display === 'none') {
+              translation.style.display = 'block';
+            } else {
+              translation.style.display = 'none';
+            }
+          });
+        });
+
+        // Set the current date in the date
+        document.getElementById('dateStamp').textContent = new Date().toLocaleDateString();
+    </script>
+    </main>
 </body>
 </html>

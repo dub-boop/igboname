@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anagram Game</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; }
+        .timer { font-size: 24px; margin: 10px; }
+        .scrambled { font-size: 36px; margin: 20px; }
+        input { font-size: 18px; padding: 5px; margin: 10px; }
+        button { font-size: 18px; padding: 5px 15px; margin: 5px; }
+        #leaderboard { margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <div id="nameEntry">
+        <h2>Enter Your Game Name</h2>
+        <input type="text" id="gameName" placeholder="Your name">
+        <button onclick="startGame()">Start Game</button>
+    </div>
+
+    <div id="gameArea" style="display: none;">
+        <button id="startNewSession" style="display: none;" onclick="startSession()">Start New Session</button>
+        <div id="endMessage" style="display: none;"></div>
+        <div id="gameControls" style="display: none;">
+            <div class="timer">Time Left: <span id="timer">120</span>s</div>
+            <div class="scrambled" id="scrambleWord"></div>
+            <input type="text" id="answer" placeholder="Your answer">
+            <button id="submitButton" onclick="checkAnswer()">Submit</button>
+            <p>Score: <span id="score">0</span> / <span id="totalQuestions">10</span></p>
+            <p id="feedback"></p>
+            <button onclick="endSession('manual')">End Session</button>
+        </div>
+    </div>
+
+    <div id="leaderboard">
+        <h2>Leaderboard</h2>
+        <ul id="leaderboardList"></ul>
+    </div>
+
+    <script> 
+        let gameName = localStorage.getItem("gameName");
+let leaderboard = JSON.parse(localStorage.getItem("leaderboard")) || [];
+let stage, currentWords, currentWordIndex, score, timer, totalTimeSpent, interval;
+
+const wordBank = [
+    "Uchenna", "Tobechukwu", "Ugonnia", "Nnanyelugo", "Ezeobi", "Okocha", "Nwokocha", "Ikechukwu",
+    "Amarachi", "Nkechi", "Izuka", "Izundu", "Zelunjo", "Ebuka", "Chukwuma", "Somto",
+    "Ugonna", "Ogonna", "Chidi", "Ifeanyi", "Amaka", "Munachimso", "Ebele", "Osita",
+    "Ekene", "Kelechi", "Ozoemena", "Chiemeka", "Egwuonwu", "Onyebuchi", "Ugochukwu", "Ebelechukwu",
+];
+
+// Initialize the game based on whether a gameName exists
+if (gameName) {
+    document.getElementById("nameEntry").style.display = "none";
+    document.getElementById("gameArea").style.display = "block";
+    document.getElementById("startNewSession").style.display = "block";
+    document.getElementById("gameControls").style.display = "none";
+    document.getElementById("endMessage").style.display = "none";
+} else {
+    document.getElementById("nameEntry").style.display = "block";
+    document.getElementById("gameArea").style.display = "none";
+}
+updateLeaderboard();
+
+// Start the game after entering a name
+function startGame() {
+    gameName = document.getElementById("gameName").value.trim();
+    if (!gameName) return alert("Please enter a game name!");
+    localStorage.setItem("gameName", gameName);
+    document.getElementById("nameEntry").style.display = "none";
+    document.getElementById("gameArea").style.display = "block";
+    startSession();
+}
+
+// Start a new session
+function startSession() {
+    document.getElementById("startNewSession").style.display = "none";
+    document.getElementById("gameControls").style.display = "block";
+    document.getElementById("endMessage").style.display = "none";
+    startStage1();
+}
+
+// Start Stage 1
+function startStage1() {
+    stage = 1;
+    currentWords = shuffleArray(wordBank).slice(0, 10);
+    currentWordIndex = 0;
+    score = 0;
+    timer = 120;
+    totalTimeSpent = 0;
+    document.getElementById("score").textContent = score;
+    document.getElementById("totalQuestions").textContent = 10;
+    document.getElementById("timer").textContent = timer;
+    startTimer();
+    nextWord();
+}
+
+// Start Stage 2
+function startStage2() {
+    stage = 2;
+    currentWords = shuffleArray(wordBank).slice(0, 20);
+    currentWordIndex = 0;
+    timer = 120;
+    document.getElementById("totalQuestions").textContent = 20;
+    document.getElementById("timer").textContent = timer;
+    startTimer();
+    nextWord();
+}
+//Scramble the word utility//
+function scrambleWord(word) {
+    let scrambled;
+    do {
+        scrambled = word.split("").sort(() => Math.random() - 0.5).join("");
+    } while (scrambled === word);
+    return scrambled;
+}
+
+// Shuffle array utility
+function shuffleArray(array) {
+    return array.sort(() => Math.random() - 0.5);
+}
+
+// Start the timer
+function startTimer() {
+    clearInterval(interval);
+    interval = setInterval(() => {
+        timer--;
+        totalTimeSpent++;
+        document.getElementById("timer").textContent = timer;
+        if (timer <= 0) {
+            endSession("timer");
+        }
+    }, 1000);
+}
+
+// Display the next word
+function nextWord() {
+    if (currentWordIndex >= currentWords.length) {
+        if (stage === 1) {
+            startStage2();
+        } else {
+            endSession("triumph");
+        }
+        return;
+    }
+    const word = currentWords[currentWordIndex];
+    document.getElementById("scrambleWord").textContent = shuffleArray(word.split("")).join("");
+    document.getElementById("answer").value = "";
+    document.getElementById("feedback").textContent = "";
+}
+
+// Check the player's answer
+function checkAnswer() {
+    const userAnswer = document.getElementById("answer").value.trim().toLowerCase();
+    const correctAnswer = currentWords[currentWordIndex];
+    if (userAnswer === correctAnswer) {
+        score++;
+        document.getElementById("score").textContent = score;
+        document.getElementById("feedback").textContent = "Correct!";
+        currentWordIndex++;
+        nextWord();
+    } else {
+        document.getElementById("feedback").textContent = "Try again!";
+    }
+}
+
+// End the session
+function endSession(reason) {
+    clearInterval(interval);
+    const efficiency = totalTimeSpent > 0 ? score / (totalTimeSpent / 60) : 0;
+
+    // Update leaderboard
+    const playerIndex = leaderboard.findIndex(entry => entry.name === gameName);
+    if (playerIndex !== -1) {
+        if (efficiency > leaderboard[playerIndex].bestEfficiency) {
+            leaderboard[playerIndex].bestEfficiency = efficiency;
+            leaderboard[playerIndex].bestScore = score;
+            leaderboard[playerIndex].bestTime = totalTimeSpent;
+        }
+    } else {
+        leaderboard.push({ name: gameName, bestEfficiency: efficiency, bestScore: score, bestTime: totalTimeSpent });
+    }
+    leaderboard.sort((a, b) => b.bestEfficiency - a.bestEfficiency);
+    localStorage.setItem("leaderboard", JSON.stringify(leaderboard));
+    updateLeaderboard();
+
+    // Display end message and show "Start New Session" button
+    let message;
+    if (reason === "timer") {
+        message = `Time's up! Your score: ${score}`;
+    } else if (reason === "triumph") {
+        message = `Triumph! You solved all 20 anagrams with a score of ${score}!`;
+    } else {
+        message = `Session ended. Your score: ${score}`;
+    }
+    document.getElementById("endMessage").textContent = message;
+    document.getElementById("endMessage").style.display = "block";
+    document.getElementById("gameControls").style.display = "none";
+    document.getElementById("startNewSession").style.display = "block";
+}
+
+// Update the leaderboard display
+function updateLeaderboard() {
+    const list = document.getElementById("leaderboardList");
+    list.innerHTML = "";
+    leaderboard.forEach(entry => {
+        const li = document.createElement("li");
+        li.textContent = `${entry.name}: Score ${entry.bestScore}, Efficiency ${entry.bestEfficiency.toFixed(2)}`;
+        list.appendChild(li);
+    });
+}
+    </script>
+</body>
+</html>

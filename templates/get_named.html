@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Igbo Name Chatbot - Ichie</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+    /* Start Page */
+    #start-page {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      text-align: center;
+    }
+    #start-button {
+      background-color: #0084ff;
+      color: white;
+      padding: 15px 30px;
+      font-size: 18px;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      margin-top: 20px;
+    }
+    #start-button:hover {
+      background-color: #005bb5;
+    }
+    /* Chatbot container */
+    #chatbot {
+      display: none;
+      width: 90%;
+      max-width: 600px;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      margin: 20px auto;
+    }
+    .chat-container {
+      display: flex;
+      flex-direction: column;
+      max-height: 70vh;
+      overflow-y: auto;
+      margin-bottom: 20px;
+    }
+    /* Message container: for aligning avatar and bubble */
+    .message-container {
+      display: flex;
+      align-items: flex-start;
+      margin: 10px 0;
+    }
+    /* Bot messages: avatar on left */
+    .message-container.bot {
+      justify-content: flex-start;
+    }
+    /* User messages: both bubble and avatar on right */
+    .message-container.user {
+      justify-content: flex-end;
+    }
+    .chat-bubble {
+      padding: 10px;
+      border-radius: 15px;
+      margin: 0 10px;
+      max-width: 75%;
+      background-color: #e0e0e0;
+      position: relative;
+      min-height: 24px; /* For the typing effect */
+    }
+    /* User bubble styling */
+    .message-container.user .chat-bubble {
+      background-color: #0084ff;
+      color: white;
+    }
+    .avatar {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    /* User options buttons */
+    .user-options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .user-options button {
+      border: none;
+      border-radius: 20px;
+      padding: 10px 15px;
+      background-color: #0084ff;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .user-options button:hover {
+      background-color: #005bb5;
+    }
+    /* Final name container */
+    .final-name-container {
+      text-align: center;
+      padding: 20px;
+      background: #f9f9f9;
+      border-radius: 10px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .final-name-container button {
+      margin-top: 15px;
+      background-color: #28a745;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+    }
+    .final-name-container button:hover {
+      background-color: #218838;
+    }
+    /* Sigil image styling */
+    .sigil-image {
+      max-width: 100px;
+      display: block;
+      margin: 10px auto;
+    }
+  </style>
+</head>
+<body>
+  <!-- Start Page -->
+  <div id="start-page">
+    <h1>Get Named</h1>
+    <h4>Get an Igbo name with the help of Ichie, the wise one.</h4>
+    <button id="start-button" onclick="startChat()">Start</button>
+  </div>
+  
+  <!-- Chatbot Section -->
+  <section id="chatbot">
+    <div class="chat-container" id="chat-window"></div>
+    <div id="response-buttons"></div>
+    <div id="final-name"></div>
+  </section>
+
+  <script>
+    // Global variables for state
+    let chatState = "start";
+    let selectedRecipient = "";
+    let gender = "";
+    let nameType = "";
+    let sigil = "";
+    
+    // Sample word banks (extend these as needed)
+    const femaleTitleNames = ["Adaeze", "Chidinma"];
+    const femaleGivenNames = ["Ngozi", "Amara"];
+    const maleGivenNames = ["Chukwuemeka", "Ikenna"];
+    const maleTitleNames = {
+      Elephant: ["Chukwudi", "Ifeanyi"],
+      Eagle: ["Obinna", "Ikenna"],
+      Crown: ["Nnamdi", "Uche"],
+      Iroko: ["Kelechi", "Emeka"]
+    };
+
+    // Utility: type out message letter-by-letter into an element.
+    function typeMessage(element, message, callback) {
+      element.innerHTML = "";
+      let index = 0;
+      const interval = setInterval(() => {
+        element.innerHTML += message.charAt(index);
+        index++;
+        if (index >= message.length) {
+          clearInterval(interval);
+          if (callback) callback();
+        }
+      }, 50); // adjust typing speed here (ms per letter)
+    }
+
+    // Helper: add a bot message with typing effect.
+    function addBotMessage(message, delay, callback) {
+      setTimeout(() => {
+        const chatWindow = document.getElementById("chat-window");
+        const container = document.createElement("div");
+        container.classList.add("message-container", "bot");
+
+        const avatar = document.createElement("img");
+        avatar.src = "ichie-avatar.png";
+        avatar.alt = "Ichie";
+        avatar.classList.add("avatar");
+
+        const bubble = document.createElement("div");
+        bubble.classList.add("chat-bubble");
+
+        container.appendChild(avatar);
+        container.appendChild(bubble);
+        chatWindow.appendChild(container);
+        scrollChat();
+        typeMessage(bubble, message, callback);
+      }, delay);
+    }
+
+    // Helper: add user options (buttons) as HTML.
+    function addUserOptions(html) {
+      document.getElementById("response-buttons").innerHTML = html;
+    }
+
+    // Scroll chat container to bottom.
+    function scrollChat() {
+      const chatContainer = document.querySelector(".chat-container");
+      chatContainer.scrollTop = chatContainer.scrollHeight;
+    }
+
+    // Start the chat by hiding the start page and showing initial bot messages.
+    function startChat() {
+      document.getElementById("start-page").style.display = "none";
+      document.getElementById("chatbot").style.display = "block";
+      document.getElementById("chat-window").innerHTML = "";
+      document.getElementById("response-buttons").innerHTML = "";
+      document.getElementById("final-name").innerHTML = "";
+      chatState = "confirmRecipient";
+      
+      // Ichie greets and asks who the name is for.
+      addBotMessage("Nnoo! I am Ichie.", 500, () => {
+        addBotMessage("Who is this name for?", 500, () => {
+          // Show recipient options.
+          addUserOptions(`
+            <div class="message-container user">
+              <div class="chat-bubble">
+                <div class="user-options">
+                  <button onclick="nextStep('Yourself')">Yourself</button>
+                  <button onclick="nextStep('Your Spouse')">Your Spouse</button>
+                  <button onclick="nextStep('Your Friend')">Your Friend</button>
+                  <button onclick="nextStep('Your Child')">Your Child</button>
+                </div>
+              </div>
+              <img src="user-avatar.png" alt="User" class="avatar">
+            </div>
+          `);
+        });
+      });
+    }
+
+    // Restart chat: return to start page.
+    function restartChat() {
+      document.getElementById("chatbot").style.display = "none";
+      document.getElementById("start-page").style.display = "flex";
+      chatState = "start";
+      selectedRecipient = "";
+      gender = "";
+      nameType = "";
+      sigil = "";
+    }
+
+    // Main conversation logic based on user choices.
+    function nextStep(choice) {
+      clearResponse();
+      const chatWindow = document.getElementById("chat-window");
+      // Append the user's choice as a message.
+      const container = document.createElement("div");
+      container.classList.add("message-container", "user");
+
+      const bubble = document.createElement("div");
+      bubble.classList.add("chat-bubble");
+      bubble.textContent = choice;
+
+      const avatar = document.createElement("img");
+      avatar.src = "user-avatar.png";
+      avatar.alt = "User";
+      avatar.classList.add("avatar");
+
+      container.appendChild(bubble);
+      container.appendChild(avatar);
+      chatWindow.appendChild(container);
+      scrollChat();
+
+      // Process based on current state.
+      if (chatState === "confirmRecipient") {
+        // Save recipient and ask confirmation.
+        selectedRecipient = choice;
+        chatState = "recipientConfirm";
+        addBotMessage(`Are you certain this name is for ${choice.toLowerCase()}?`, 1000, () => {
+          addUserOptions(`
+            <div class="message-container user">
+              <div class="chat-bubble">
+                <div class="user-options">
+                  <button onclick="nextStep('Yes')">Yes</button>
+                  <button onclick="nextStep('No')">No</button>
+                </div>
+              </div>
+              <img src="user-avatar.png" alt="User" class="avatar">
+            </div>
+          `);
+        });
+      }
+      else if (chatState === "recipientConfirm") {
+        if (choice === "No") {
+          // Ask if the user seeks to waste the time of the gods, then repeat confirmation.
+          chatState = "wasteResponse";
+          addBotMessage("Do you seek to waste the time of the gods?", 1000, () => {
+            addUserOptions(`
+              <div class="message-container user">
+                <div class="chat-bubble">
+                  <div class="user-options">
+                    <button onclick="nextStep('YesWaste')">Yes</button>
+                    <button onclick="nextStep('NoWaste')">No</button>
+                  </div>
+                </div>
+                <img src="user-avatar.png" alt="User" class="avatar">
+              </div>
+            `);
+          });
+        } else if (choice === "Yes") {
+          // Proceed to ask for gender.
+          chatState = "selectGender";
+          addBotMessage("Which of these are they?", 1000, () => {
+            addUserOptions(`
+              <div class="message-container user">
+                <div class="chat-bubble">
+                  <div class="user-options">
+                    <button onclick="nextStep('Female')">Female</button>
+                    <button onclick="nextStep('Male')">Male</button>
+                    <button onclick="nextStep('Others')">Others</button>
+                  </div>
+                </div>
+                <img src="user-avatar.png" alt="User" class="avatar">
+              </div>
+            `);
+          });
+        }
+      }
+      else if (chatState === "wasteResponse") {
+        // Regardless of YesWaste or NoWaste, return to recipient confirmation.
+        chatState = "recipientConfirm";
+        addBotMessage(`Are you certain this name is for ${selectedRecipient.toLowerCase()}?`, 1000, () => {
+          addUserOptions(`
+            <div class="message-container user">
+              <div class="chat-bubble">
+                <div class="user-options">
+                  <button onclick="nextStep('Yes')">Yes</button>
+                  <button onclick="nextStep('No')">No</button>
+                </div>
+              </div>
+              <img src="user-avatar.png" alt="User" class="avatar">
+            </div>
+          `);
+        });
+      }
+      else if (chatState === "selectGender") {
+        if (choice === "Others") {
+          // For Others, reply and ask again.
+          addBotMessage("You confuse the ichie and your chi.", 1000, () => {
+            addUserOptions(`
+              <div class="message-container user">
+                <div class="chat-bubble">
+                  <div class="user-options">
+                    <button onclick="nextStep('Female')">Female</button>
+                    <button onclick="nextStep('Male')">Male</button>
+                    <button onclick="nextStep('Others')">Others</button>
+                  </div>
+                </div>
+                <img src="user-avatar.png" alt="User" class="avatar">
+              </div>
+            `);
+          });
+        } else {
+          gender = choice;
+          chatState = "confirmGender";
+          addBotMessage("Are you certain of this?", 1000, () => {
+            addUserOptions(`
+              <div class="message-container user">
+                <div class="chat-bubble">
+                  <div class="user-options">
+                    <button onclick="nextStep('YesConfirm')">Yes</button>
+                    <button onclick="nextStep('NoConfirm')">No</button>
+                  </div>
+                </div>
+                <img src="user-avatar.png" alt="User" class="avatar">
+              </div>
+            `);
+          });
+        }
+      }
+      else if (chatState === "confirmGender") {
+        if (choice === "NoConfirm") {
+          // Return to gender selection.
+          chatState = "selectGender";
+          addUserOptions(`
+            <div class="message-container user">
+              <div class="chat-bubble">
+                <div class="user-options">
+                  <button onclick="nextStep('Female')">Female</button>
+                  <button onclick="nextStep('Male')">Male</button>
+                  <button onclick="nextStep('Others')">Others</button>
+                </div>
+              </div>
+              <img src="user-avatar.png" alt="User" class="avatar">
+            </div>
+          `);
+        } else if (choice === "YesConfirm") {
+          addBotMessage("hmmm… the gods are not wrong. It is true", 1000, () => {
+            chatState = "askNameType";
+            addBotMessage("What name do you seek? (Title name or Given name)", 1000, () => {
+              addUserOptions(`
+                <div class="message-container user">
+                  <div class="chat-bubble">
+                    <div class="user-options">
+                      <button onclick="nextStep('Title')">Title Name</button>
+                      <button onclick="nextStep('Given')">Given Name</button>
+                    </div>
+                  </div>
+                  <img src="user-avatar.png" alt="User" class="avatar">
+                </div>
+              `);
+            });
+          });
+        }
+      }
+      else if (chatState === "askNameType") {
+        // Processing for both Female and Male will use this state.
+        nameType = choice; // "Title" or "Given"
+        if (gender === "Female") {
+          if (choice === "Title") {
+            addBotMessage("You seek with boldness. Your chi is impressed", 1000, () => {
+              addBotMessage("Title names are not for women with timid chi", 1000, () => {
+                // Randomly select a female title name.
+                let name = femaleTitleNames[Math.floor(Math.random() * femaleTitleNames.length)];
+                showFinalName(name, "This name signifies leadership and bold femininity.");
+              });
+            });
+          } else if (choice === "Given") {
+            addBotMessage("You are about to become a part of a great people", 1000, () => {
+              // Randomly select a female given name.
+              let name = femaleGivenNames[Math.floor(Math.random() * femaleGivenNames.length)];
+              showFinalName(name, "This name embodies the grace and strength of a great lineage.");
+            });
+          }
+        }
+        else if (gender === "Male") {
+          if (choice === "Title") {
+            addBotMessage("You seek with boldness. Your chi is impressed", 1000, () => {
+              addBotMessage("Title names are not for men of little ambition", 1000, () => {
+                chatState = "pickSigil";
+                addBotMessage("Pick your sigil", 1000, () => {
+                  addUserOptions(`
+                    <div class="message-container user">
+                      <div class="chat-bubble">
+                        <div class="user-options">
+                          <button onclick="nextStep('Elephant')">Elephant</button>
+                          <button onclick="nextStep('Eagle')">Eagle</button>
+                          <button onclick="nextStep('Crown')">Crown</button>
+                          <button onclick="nextStep('Iroko')">Iroko</button>
+                        </div>
+                      </div>
+                      <img src="user-avatar.png" alt="User" class="avatar">
+                    </div>
+                  `);
+                });
+              });
+            });
+          } else if (choice === "Given") {
+            addBotMessage("You are about to become a part of a great people", 1000, () => {
+              let name = maleGivenNames[Math.floor(Math.random() * maleGivenNames.length)];
+              showFinalName(name, "This name reflects strength and a storied legacy.");
+            });
+          }
+        }
+      }
+      else if (chatState === "pickSigil") {
+        // This branch is for male title names.
+        sigil = choice;
+        // Display sigil image and message.
+        let sigilMsg = "";
+        let sigilImg = "";
+        if (choice === "Elephant") {
+          sigilMsg = "The elephant is a symbol of strength and power. You chose well.";
+          sigilImg = "elephant.jpg";
+        } else if (choice === "Eagle") {
+          sigilMsg = "The eagle is a symbol of honour and excellence. Great choice.";
+          sigilImg = "eagle.jpg";
+        } else if (choice === "Crown") {
+          sigilMsg = "The crown is a symbol of headship but one borne with great care for the people. You relish your duties. Don’t you? Excellent.";
+          sigilImg = "crown.jpg";
+        } else if (choice === "Iroko") {
+          sigilMsg = "The Iroko is a symbol of greatness. You see it.";
+          sigilImg = "iroko.jpg";
+        }
+        addBotMessage("", 500, () => {
+          // Display sigil image in a bot bubble.
+          const chatWindow = document.getElementById("chat-window");
+          const container = document.createElement("div");
+          container.classList.add("message-container", "bot");
+          const avatar = document.createElement("img");
+          avatar.src = "ichie-avatar.png";
+          avatar.alt = "Ichie";
+          avatar.classList.add("avatar");
+          const bubble = document.createElement("div");
+          bubble.classList.add("chat-bubble");
+          // Insert sigil image and then type message.
+          bubble.innerHTML = `<img src="${sigilImg}" alt="${sigil}" class="sigil-image">`;
+          container.appendChild(avatar);
+          container.appendChild(bubble);
+          chatWindow.appendChild(container);
+          scrollChat();
+          typeMessage(bubble, " " + sigilMsg, () => {
+            // Randomly select a male title name from the corresponding sigil word bank.
+            let nameArr = maleTitleNames[sigil];
+            let name = nameArr[Math.floor(Math.random() * nameArr.length)];
+            showFinalName(name, "This name exudes ambition, power, and honor.");
+          });
+        });
+      }
+    }
+
+    // Clear response area.
+    function clearResponse() {
+      document.getElementById("response-buttons").innerHTML = "";
+    }
+
+    // Display final name with explanation and a restart option.
+    function showFinalName(name, explanation) {
+      // Determine the introduction based on the name type.
+      let intro = "";
+      if (nameType === "Title") {
+        intro = "Your title name is:";
+      } else if (nameType === "Given") {
+        intro = "Your given name is:";
+      }
+      addBotMessage(`${intro} ${name}`, 1000, () => {
+        addBotMessage(explanation, 1000, () => {
+          document.getElementById("final-name").innerHTML = `
+            <div class="final-name-container">
+              <p><strong>${intro} ${name}</strong></p>
+              <p>${explanation}</p>
+              <button onclick="restartChat()">Restart</button>
+            </div>
+          `;
+        });
+      });
+    }
+  </script>
+</body>
+</html>

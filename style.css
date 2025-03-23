@@ -571,145 +571,40 @@ flex-wrap: wrap;
     color: #e30b0b;
   }
   
-/* Media Query for Mobile Devices */
-@media (max-width: 768px) {
-  /* Adjust the navigation menu */
-  .nav-links {
+  /* Media Queries for Responsiveness */
+  @media (max-width: 768px) {}
+    .main-header nav ul {
       flex-direction: column;
       gap: 10px;
-      text-align: center;
-  }
-
-  .nav-links a {
-      margin: 0.5rem 0;
-  }
-
-  /* Adjust the header */
-  header {
-      padding: 10px;
-  }
-
-  /* Adjust the container */
-  .container {
-      padding: 0 10px;
-  }
-
-  /* Adjust the footer */
-  .main-footer .container {
+    }
+  
+    .main-header form {
+      margin-top: 10px;
+    }
+  
+    .name-of-the-day .container {
       flex-direction: column;
-      text-align: center;
-  }
-
-  .left-content, .right-content {
-      margin-bottom: 20px;
-  }
-
-  /* Adjust sections like FAQ, Privacy, etc. */
-  .faq-box, .privacy-box, .name-box {
+    }
+  
+    .name-of-the-day .left-content {
       width: 100%;
-      padding: 10px;
-  }
-
-  /* Adjust the trending section */
-  .trending {
-      grid-template-columns: 1fr;
-      gap: 1rem;
-  }
-
-  /* Adjust the game cards */
-  .games-container {
+      margin-bottom: 20px;
+    }
+  
+    .featured-name-card {
+      width: 100%;
+      margin-top: 0;
+    }
+  
+    .trending-categories {
       flex-direction: column;
       align-items: center;
-  }
-
-  .game-card {
+    }
+  
+    .category {
       width: 100%;
       margin-bottom: 20px;
-  }
-}
-
-/* Adjust FAQ box for smaller screens */
-@media (max-width: 768px) {
-    .faq-box {
-        width: 100%; /* Make it responsive */
-        padding: 10px;
     }
-
-    .game-card {
-        width: 100%; /* Adjust game cards */
-        margin-bottom: 20px;
-    }
-
-    .nav-links {
-        flex-direction: column;
-        gap: 10px;
-        text-align: center;
-    }
-
-    .nav-links a {
-        margin: 0.5rem 0;
-    }
-
-    .search-bar {
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    .search-bar input {
-        width: 100%; /* Full width for smaller screens */
-    }
-
-    .trending {
-        grid-template-columns: 1fr; /* Stack trending items */
-        gap: 1rem;
-    }
-
-    .main-footer .container {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .left-content, .right-content {
-        margin-bottom: 20px;
-    }
-}
-
-/* Ensure images are responsive */
-img {
-    max-width: 100%;
-    height: auto;
-}
-
-/* Add styles for a hamburger menu */
-.hamburger {
-    display: none;
-    cursor: pointer;
-}
-
-.hamburger div {
-    width: 25px;
-    height: 3px;
-    background-color: white;
-    margin: 5px 0;
-}
-
-@media (max-width: 768px) {
-    .hamburger {
-        display: block;
-    }
-
-    .nav-links {
-        display: none;
-        flex-direction: column;
-        gap: 10px;
-        background-color: teal;
-        padding: 10px;
-    }
-
-    .nav-links.active {
-        display: flex;
-    }
-}
   
 /* Contribute Menu */
 #contribute {

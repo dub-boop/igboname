@@ -21,7 +21,11 @@ h6 { font-size: 0.875rem; }
         header {
             background-color: teal;
             color: white;
-            padding: 1rem;
+            padding: 10px 20px;
+            width: 100%;
+            max-width: 1300px;
+            margin: 0 auto;
+            display:block;
         }
 
         nav {
@@ -221,10 +225,10 @@ background-color: #008080;
 padding: 20px 0;
 color: white;
 width: 100%; /* Ensure the footer stretches across the screen */
+max-width: 1300px;
 }
   
 .main-footer .container {
-max-width: 1200px;
 margin: 0 auto;
 padding: 0 20px;
 display: flex;
@@ -504,6 +508,7 @@ flex-wrap: wrap;
         padding: 20px 0;
         color: white;
         width: 100%;
+        display: block;
         }
   
         .main-footer .container {
@@ -566,40 +571,145 @@ flex-wrap: wrap;
     color: #e30b0b;
   }
   
-  /* Media Queries for Responsiveness */
-  @media (max-width: 768px) {}
-    .main-header nav ul {
+/* Media Query for Mobile Devices */
+@media (max-width: 768px) {
+  /* Adjust the navigation menu */
+  .nav-links {
       flex-direction: column;
       gap: 10px;
-    }
-  
-    .main-header form {
-      margin-top: 10px;
-    }
-  
-    .name-of-the-day .container {
+      text-align: center;
+  }
+
+  .nav-links a {
+      margin: 0.5rem 0;
+  }
+
+  /* Adjust the header */
+  header {
+      padding: 10px;
+  }
+
+  /* Adjust the container */
+  .container {
+      padding: 0 10px;
+  }
+
+  /* Adjust the footer */
+  .main-footer .container {
       flex-direction: column;
-    }
-  
-    .name-of-the-day .left-content {
-      width: 100%;
+      text-align: center;
+  }
+
+  .left-content, .right-content {
       margin-bottom: 20px;
-    }
-  
-    .featured-name-card {
+  }
+
+  /* Adjust sections like FAQ, Privacy, etc. */
+  .faq-box, .privacy-box, .name-box {
       width: 100%;
-      margin-top: 0;
-    }
-  
-    .trending-categories {
+      padding: 10px;
+  }
+
+  /* Adjust the trending section */
+  .trending {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+  }
+
+  /* Adjust the game cards */
+  .games-container {
       flex-direction: column;
       align-items: center;
-    }
-  
-    .category {
+  }
+
+  .game-card {
       width: 100%;
       margin-bottom: 20px;
+  }
+}
+
+/* Adjust FAQ box for smaller screens */
+@media (max-width: 768px) {
+    .faq-box {
+        width: 100%; /* Make it responsive */
+        padding: 10px;
     }
+
+    .game-card {
+        width: 100%; /* Adjust game cards */
+        margin-bottom: 20px;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+
+    .nav-links a {
+        margin: 0.5rem 0;
+    }
+
+    .search-bar {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .search-bar input {
+        width: 100%; /* Full width for smaller screens */
+    }
+
+    .trending {
+        grid-template-columns: 1fr; /* Stack trending items */
+        gap: 1rem;
+    }
+
+    .main-footer .container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .left-content, .right-content {
+        margin-bottom: 20px;
+    }
+}
+
+/* Ensure images are responsive */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Add styles for a hamburger menu */
+.hamburger {
+    display: none;
+    cursor: pointer;
+}
+
+.hamburger div {
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    margin: 5px 0;
+}
+
+@media (max-width: 768px) {
+    .hamburger {
+        display: block;
+    }
+
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        gap: 10px;
+        background-color: teal;
+        padding: 10px;
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+}
   
 /* Contribute Menu */
 #contribute {

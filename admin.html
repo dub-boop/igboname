@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .card { border: 1px solid #ccc; padding: 20px; margin-bottom: 20px; border-radius: 5px; }
+        .input, select, button { display: block; width: 100%; padding: 10px; margin-bottom: 10px; }
+        .table { width: 100%; border-collapse: collapse; }
+        .table th, .table td { border: 1px solid #ccc; padding: 10px; }
+        .map-placeholder { height: 200px; border: 1px solid #ccc; text-align: center; line-height: 200px; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2>Overview</h2>
+        <p>Total Entries: 0</p>
+        <p>Entries Awaiting Approval: 0</p>
+    </div>
+    
+    <div class="card">
+        <h2>Search Database</h2>
+        <select><option>Filter by Gender</option></select>
+        <select><option>Filter by Type</option></select>
+        <select><option>Filter by Subtype</option></select>
+    </div>
+    
+    <div class="card">
+        <h2>Add New Entry</h2>
+        <input class="input" type="text" placeholder="Enter name...">
+        <select><option>Select Gender</option></select>
+        <select><option>Select Type</option></select>
+        <select><option>Select Sub-type</option></select>
+        <label>Pronunciation</label>
+        <input class="input" type="file" accept="audio/*">
+        <input class="input" type="text" placeholder="Igbo Orthography...">
+        <label>Ndebe Script</label>
+        <input class="input" type="file" accept="image/*" multiple>
+        <h3>Translation</h3>
+        <textarea class="input"></textarea>
+        <h3>Meaning</h3>
+        <textarea class="input"></textarea>
+        <input class="input" type="text" placeholder="Related Names...">
+        <h3>Popular People</h3>
+        <div>
+            <input class="input" type="text" placeholder="Image URL">
+            <input class="input" type="text" placeholder="Profile Link">
+        </div>
+        <button>Add More</button>
+        <h3>Name Spread</h3>
+        <div class="map-placeholder">Map Placeholder</div>
+        <button>Send</button>
+    </div>
+    
+    <div class="card">
+        <h2>Manage Entries</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Sample Name</td>
+                    <td>
+                        <button>Edit</button>
+                        <button>Approve</button>
+                        <button>Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Igbo Names & Culture</title>
+    <link rel="stylesheet" href="..\style.css">
+    </head>
+<body>
+    <header>
+        <nav>
+            <div class="nav-links">
+                <img src="../logo.png" alt="logo">
+                <a href="..\index.html">Home</a>
+                <a href="contribute.html">Contribute</a>
+                <a href="proverbs.html">Proverb of the Day</a>
+                <a href="games.html">Games</a>
+                <a href="learn.html">Learn</a>
+                <a href="blog.html">Blog</a>
+            </div>
+            <div class="search-bar">
+                <input type="text" placeholder="Search Igbo names...">
+                <button>Search</button>
+            </div>
+        </nav>
+    </header>
+ <!-- Name Card Section -->
+ <main class="name-card">
+    <h1>NAME CARD</h1>
+    <p>A dictionary of Igbo names. Translate Igbo names to English. Find the meaning of Igbo names and contribute to the community.</p>
+
+    <div class="card">
+        <div class="card-header">
+            <h2 id="name-title">Ozo</h2>
+            <span class="gender-badge">Male</span>
+        </div>
+
+        <p><strong>Type/Sub-type:</strong> <span id="type-subtype">Title Name - Surname</span></p>
+
+        <p><strong>Pronunciation:</strong> <span id="pronunciation">/Ozo/</span></p>
+
+        <p><strong>Igbo Orthography:</strong> <span id="orthography">Ọzọ</span></p>
+
+        <p><strong>Ndebe Script:</strong> <img src="ndeve_placeholder.png" alt="Ndebe Script"></p>
+
+        <p><strong>Translation:</strong> <span id="translation">Prestigious title</span></p>
+
+        <p><strong>Meaning:</strong> <span id="meaning">A prestigious title acquired by the Igbos.</span></p>
+
+        <p><strong>Related Names:</strong> <span id="related-names">Ozoh, Ozor, Ozoekwe, Ozodinobi, Ozajiofor</span></p>
+
+        <p><strong>Additional Notes:</strong> <span id="notes">In some Igbo communities, Ozo title has subcategories...</span></p>
+
+        <h3>Notable Persons</h3>
+        <div class="notable-persons">
+            <img src="person1.jpg" alt="Person 1">
+            <img src="person2.jpg" alt="Person 2">
+            <img src="person3.jpg" alt="Person 3">
+        </div>
+
+        <h3>Indigenous Name Spread</h3>
+        <div class="name-spread">
+            <img src="map_placeholder.jpg" alt="Name Spread Map">
+        </div>
+
+        <h3>Related Articles</h3>
+        <p><a href="#">UGO IN IGBO NAMES - A FEATHER IN ONE’S CAP</a></p>
+    </div>
+
+    <!-- Comments Section -->
+    <section class="comments">
+        <h3>Comment</h3>
+        <input type="text" id="comment-input" placeholder="Write a comment...">
+        <button onclick="addComment()">Send</button>
+
+        <div id="comment-section">
+            <div class="comment">
+                <strong>Anonymous</strong>
+                <p>The Dim in Ikemba Nnewi’s name comes from the Ozo title?</p>
+                <button class="reply-btn">Reply</button>
+            </div>
+            <div class="reply">
+                <strong>Ekene Odiari</strong>
+                <p>Yes, my maternal grandfather took the Ozo Dim title in their community.</p>
+            </div>
+        </div>
+    </section>
+</main>
+
+<script>
+    function addComment() {
+        const input = document.getElementById("comment-input");
+        const commentSection = document.getElementById("comment-section");
+        
+        if (input.value.trim() === "") {
+            alert("Please enter a comment before sending.");
+            return;
+        }
+        
+        const commentDiv = document.createElement("div");
+        commentDiv.classList.add("comment");
+        commentDiv.innerHTML = `<strong>Anonymous</strong><p>${input.value}</p>`;
+        commentSection.appendChild(commentDiv);
+        
+        input.value = ""; // Clear input field after adding comment
+    }
+</script>
+</body>
+</html>

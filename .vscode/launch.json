@@ -5,6 +5,12 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Open name.html",
+            "request": "launch",
+            "type": "chrome",
+            "webRoot": "${workspaceFolder}/name.html"
+        },
+        {
             "name": "Open index.html",
             "request": "launch",
             "type": "chrome",
